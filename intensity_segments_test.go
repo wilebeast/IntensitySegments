@@ -5,7 +5,7 @@ import (
 )
 
 func TestIntensitySegments(t *testing.T) {
-	segments := &IntensitySegments{}
+	segments := NewIntensitySegments()
 
 	// Test initial state
 	if got := segments.ToString(); got != "[]" {
@@ -39,7 +39,7 @@ func TestIntensitySegments(t *testing.T) {
 	}
 
 	// Reset and test another scenario
-	segments = &IntensitySegments{}
+	segments = NewIntensitySegments()
 	if got := segments.ToString(); got != "[]" {
 		t.Errorf("expected '[]', got %s", got)
 	}
