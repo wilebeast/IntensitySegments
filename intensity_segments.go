@@ -50,26 +50,24 @@ func (is *IntensitySegments) setSegments(from, to, amount int) {
 
 	// Insert the 'to' point
 	if current == is.head || current.point != to {
-		newNode := &Node{point: from, intensity: 0, pre: current, next: current.next}
-		if current.pre != is.head {
-			newNode.intensity = current.pre.intensity
+		newNode := &Node{point: to, intensity: 0, pre: current, next: current.next}
+		if current != is.head {
+			newNode.intensity = current.intensity
 		}
 		newNode.pre.next = newNode
 		newNode.next.pre = newNode
-		current = current.pre
-		//current = newNode.next
 	}
 
 	// Update the intensity from 'from' to 'to'
 	for current != is.head && current.point >= from {
 		current.intensity = amount
 		// Move to the next segment
-		current = current.next
+		current = current.pre
 	}
 
 	if current == is.head || current.point != from {
-		// Insert the 'to' point
-		newNode := &Node{point: to, intensity: amount, pre: current, next: current.next}
+		// Insert the 'from' point
+		newNode := &Node{point: from, intensity: amount, pre: current, next: current.next}
 		newNode.pre.next = newNode
 		newNode.next.pre = newNode
 	}
